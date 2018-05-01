@@ -52,32 +52,25 @@ public class MainActivity extends AppCompatActivity {
             // Create directory.
             File externalStorageDirectory = Environment.getExternalStorageDirectory();
             File appDirectory = new File(externalStorageDirectory.getAbsolutePath() + "/EZCamLibrary");
-            if (appDirectory.mkdirs()) {
+            appDirectory.mkdirs();
 
-                // Create file name.
-                String fileName = String.format(Locale.ENGLISH, "%d.jpg", System.currentTimeMillis());
+            // Create file name.
+            String fileName = String.format(Locale.ENGLISH, "%d.jpg", System.currentTimeMillis());
 
-                File imageFile = new File(appDirectory, fileName);
+            File imageFile = new File(appDirectory, fileName);
 
-                try {
-                    // Save the image in device.
-                    EZCam.saveImage(image, imageFile);
-                    refreshGallery(imageFile);
+            try {
+                // Save the image in device.
+                EZCam.saveImage(image, imageFile);
+                refreshGallery(imageFile);
 
-                    Log.d(TAG, "Image Saved to: " + imageFile.getAbsolutePath());
-                    Toast.makeText(MainActivity.this, "Image Saved to: " + imageFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Image Saved to: " + imageFile.getAbsolutePath());
+                Toast.makeText(MainActivity.this, "Image Saved to: " + imageFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
 
-                } catch (IOException e) {
-                    Log.e(TAG, e.toString());
-                    e.printStackTrace();
-                }
-            } else {
-                // Directory not exist / created.
-                Log.e(TAG, "Directory not exist / created");
-                Toast.makeText(MainActivity.this, "Directory not exist / created", Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                Log.e(TAG, e.toString());
+                e.printStackTrace();
             }
-
-
         }
 
         @Override
